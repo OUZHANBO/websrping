@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <context-param>
+    <!-- servlet容器初始化时的参数，可以通过servletContext.getInitParameter("contextConfigLocation")获取   -->
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:/application.xml</param-value>
+  </context-param>
+
+  <listener>
+    <!-- 配置servlet容器的监听器 -->
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- servlet的初始化时的参数，可以在DispatcherServlet里通过getInitParameter("contextConfigLocation")获取 -->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath*:/application-mvc.xml</param-value>
+    </init-param>
+    <!-- servlet的加载顺序，如果是为负数就是在第一次请求该servlet时候才会加载，当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet，正数的值越小，该servlet的优先级越高，应用启动时就越先加载   -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
